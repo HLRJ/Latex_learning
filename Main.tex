@@ -34,7 +34,7 @@
 	frame=single,                    % adds a frame around the code
 	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
 	keywordstyle=\color{blue},       % keyword style
-	language=C++,                    % the language of the code
+	language=bash,                    % the language of the code
 	morekeywords={},                 % if you want to add more keywords to the set
 	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
 	numbersep=5pt,                   % how far the line-numbers are from the code
@@ -50,6 +50,9 @@
 }
 %url
 \usepackage{hyperref}
+% ref
+\usepackage{gbt7714}
+\bibliographystyle{gbt7714-numerical}
 \begin{document}
 	
 \section{You will get}
@@ -61,26 +64,73 @@
 	\item  遇到问题怎么解决
 \end{itemize}
 
+\newpage
 
-\section{install}
+\section{Install}
 
 \subsection{安装介绍}
 
-安装步骤，参考\href{https://github.com/OsbertWang/install-latex-guide-zh-cn/releases}{文档}
+安装步骤，参考\href{https://github.com/OsbertWang/install-latex-guide-zh-cn/releases}{guide手册}
 
 从\href{https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/}{清华下载镜像源 texlive2023.iso}
 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=1.0\textwidth]{images/texlive2023Images.png}
+	\caption{镜像源~ 选择texlive2023.iso}
+	\label{fig:2023image}
+\end{figure}
+
+安装过程
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.4\textwidth]{images/installing_1.png}
+	\qquad
+	\includegraphics[width=0.4\textwidth]{images/installing_2.png}
+	\caption{安装过程}
+	\label{fig:install}
+\end{figure}
+
+
+
+\newpage
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/texstudio.png}
+	\caption{下载你的平台版本}
+	\label{fig:texstudio}
+\end{figure}
+
 编辑器下载\href{https://www.texstudio.org/}{texstudio}
 
-以及其他编辑器 如texmaker 、jetbrains ( pycharm、clion ) 装插件、vscode
 
-\subsection{我自己的安装流程}
 
-下载镜像
+ubuntu下安装texstudio
 
-配置环境变量
+\begin{lstlisting}
+	sudo add-apt-repository ppa:sunderme/texstudio
+	sudo apt update
+	sudo apt install texstudio
+\end{lstlisting}
 
-安装texstudio
+以及其他编辑器 如texmaker 、jetbrains ( pycharm、clion ) 装插件、配置vscode
+
+
+配置texlive2023环境变量
+
+\begin{lstlisting}
+	vi ~/.bashrc
+	export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
+	export MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH
+	export INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
+\end{lstlisting}
+
+
+
+
+\newpage
 
 \section{use}
 
@@ -91,7 +141,8 @@
 \subsubsection{插入公式}
 
 \subsubsection{图片}
- 、、  图片（作图） 、表格  、字体设置、 页面设置 、目录、 文件结构 、 自定义命令、插入链接、jabref 引用文献 
+
+
  
  \subsubsection{表格}
  
@@ -124,16 +175,16 @@
  
  \section{template}
 
-使用模板， 以nips imcl为例
+使用模板， 以nips imcl为例\cite{kaelbling1996reinforcement}
 
 
 \section{solve problem}
 
- chatgpt，查阅文档
+ chatgpt，查阅文档  texdoc name\cite{lecun2015deep}
 
-参考的文档，一份简单的介绍
+参考的文档，一份简单的介绍\cite{de2019causal}
 
-arxiv上下载latex版本文章
+arxiv上下载latex版本文章\cite{wen2020fighting}
 
 install
 
@@ -166,5 +217,9 @@ https://tex.stackexchange.com/
 https://www.mathcha.io/
 
 https://www.latexlive.com/home\#\#
+
+
+\bibliography{bib/ref_learn.bib}
+
 
 \end{document}
