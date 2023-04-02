@@ -53,6 +53,17 @@
 % ref
 \usepackage{gbt7714}
 \bibliographystyle{gbt7714-numerical}
+% 字体
+\usepackage{fontspec}
+\usepackage{xeCJK}
+
+\newcommand{\xbsong}{\CJKfamily{zhxbs}}
+\newcommand{\dbsong}{\CJKfamily{zhdbs}}
+
+\newcommand{\dahei}{\CJKfamily{zhdh}}
+% 隶书
+\setCJKfamilyfont{ls}{LiSu}                                                                                                                         
+\newcommand{\lishu}{\CJKfamily{ls}} 
 \begin{document}
 	
 \section{You will get}
@@ -70,7 +81,11 @@
 
 \subsection{安装介绍}
 
+
+
 安装步骤，参考\href{https://github.com/OsbertWang/install-latex-guide-zh-cn/releases}{guide手册}
+
+\href{https://www.tug.org/texlive/doc/texlive-zh-cn/texlive-zh-cn.pdf}{guide手册2}
 
 从\href{https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/}{清华下载镜像源 texlive2023.iso}
 
@@ -148,6 +163,27 @@ ubuntu下安装texstudio
  
  \subsubsection{字体设置}
  
+ {\heiti\zihao{2} 黑体\qquad 追逐影子的人，自己就是影子。}
+ 
+ {\songti\zihao{-2} 宋体\qquad 追逐影子的人，自己就是影子。}
+ 
+    {\heiti\zihao{-4} 黑体\qquad 追逐影子的人，自己就是影子。}
+ 
+ {\fangsong\zihao{-4} 仿宋\qquad 追逐影子的人，自己就是影子。}
+ 
+ {\lishu\zihao{-4} 隶书\qquad 追逐影子的人，自己就是影子。}
+ 
+  {\songti\zihao{-4} 宋体\qquad 追逐影子的人，自己就是影子。}
+  
+   {\kaishu\zihao{-4} 楷书\qquad 追逐影子的人，自己就是影子。}
+   
+   
+   \begin{figure}[ht]
+   	\centering
+   	\includegraphics[width=0.5\textwidth]{images/font.png}
+   	\caption{安装win平台字体}
+   	\label{fig:setfont}
+   \end{figure}
  \subsubsection{页面设置}
  
  \subsubsection{目录}
