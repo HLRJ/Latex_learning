@@ -7,7 +7,7 @@
 
 
 % Packages
-\usepackage{amsmath}
+\usepackage{amsmath,amssymb}
 % graphicx
 \usepackage{graphicx}
 % 页面设置
@@ -53,6 +53,8 @@
 % ref
 \usepackage{gbt7714}
 \bibliographystyle{gbt7714-numerical}
+%table
+\usepackage{booktabs, tabularx, multirow}
 % 字体
 \usepackage{fontspec}
 \usepackage{xeCJK}
@@ -64,6 +66,8 @@
 % 隶书
 \setCJKfamilyfont{ls}{LiSu}                                                                                                                         
 \newcommand{\lishu}{\CJKfamily{ls}} 
+% 自定义命令
+\newcommand{\EE}{\mathbb{E}}
 \begin{document}
 	
 \section{You will get}
@@ -161,6 +165,20 @@ ubuntu下安装texstudio
  
  \subsubsection{表格}
  
+ \begin{table}[ht]
+ 	\centering
+ 	\caption{Expected \texttt{FunctionInfo} Output for \texttt{Loop.c}}
+ 	\begin{tabular}{*{5}{c}}
+ 		\toprule
+ 		Name & \# Args & \# Calls & \# Blocks & \# Insts \\
+ 		\midrule
+ 		\texttt{g\_incr} & 1 & 0 & 1 &  4 \\
+ 		\texttt{loop}    & 3 & 0 & 3 & 10 \\
+ 		\bottomrule
+ 	\end{tabular}
+ 	\label{functioninfo-loop-mb}
+ \end{table}
+ 
  \subsubsection{字体设置}
  
  {\heiti\zihao{2} 黑体\qquad 追逐影子的人，自己就是影子。}
@@ -192,7 +210,21 @@ ubuntu下安装texstudio
  
  \subsubsection{插入链接}
  
+  在线的编辑器 \href{www.overleaf.com}{国际overleaf}
+ 
  \subsubsection{自定义命令}
+ 
+ \begin{lstlisting}[language=tex]
+ 	\newcommand{\EE}{\mathbb{E}}
+ \end{lstlisting}
+
+\begin{equation}
+	\mathbb{E}
+\end{equation}
+
+\begin{equation}
+	\EE
+\end{equation}
  
  \subsubsection{引用文献}
  
