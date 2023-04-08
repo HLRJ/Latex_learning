@@ -69,6 +69,7 @@
 % 自定义命令
 \newcommand{\EE}{\mathbb{E}}
 \begin{document}
+\tableofcontents
 	
 \section{You will get}
 
@@ -157,15 +158,93 @@ ubuntu下安装texstudio
 
 \subsubsection{ 插入代码}
 
+\begin{lstlisting}
+	#include <llvm/Passes/PassBuilder.h>
+	#include <llvm/Passes/PassPlugin.h>
+	#include <llvm/Support/raw_ostream.h>
+	
+	using namespace llvm;
+	
+	namespace {
+		
+		class FunctionInfoPass final : public PassInfoMixin<FunctionInfoPass> {
+			public:
+			PreservedAnalyses run([[maybe_unused]] Module &M, ModuleAnalysisManager &) {
+				outs() << "CSCD70 Function Information Pass"
+				<< "\n";
+				/// @todo(CSCD70) Please complete this method.
+				for (auto &F : M.functions()) {
+					outs() << "Function Name: " << F.getName() << "\n";
+					outs() << "Number of Arguments: " << F.arg_size() << "\n";
+					// Count direct call sites.
+					int numDirectCalls = 0;
+					for (User *U : F.users()) {
+						if (auto *CI = dyn_cast<CallInst>(U)) {
+							if (CI->getCalledFunction() == &F) {
+								++numDirectCalls;
+							}
+						}
+					}
+					outs() << "Number of Calls: " << numDirectCalls << "\n";
+					
+					int numBasicBlocks = 0, numInstructions = 0;
+					for (BasicBlock &BB : F) {
+						++numBasicBlocks;
+						for (Instruction &I : BB) {
+							++numInstructions;
+						}
+					}
+					outs() << "Number OF BBs: " << numBasicBlocks << "\n";
+					outs() << "Number of Instructions: " << numInstructions << "\n";
+				}
+				//M.print(outs(), nullptr);
+				return PreservedAnalyses::all();
+			}
+		}; // class FunctionInfoPass
+		
+	} // anonymous namespace
+\end{lstlisting}
+
+
 \subsubsection{插入公式}
 
+\[
+\mathbf{P}=
+\begin{bmatrix}
+	P(s_1|s_1) & P(s_2|s_1) & \ldots & P(s_N|s_1)\\
+	P(s_1|s_2) & P(s_2|s_2) & \ldots & P(s_N|s_2)\\
+	\vdots & \vdots & \ddots & \vdots\\
+	P(s_1|s_N) & P(s_2|s_N) & \ldots & P(s_N|s_N)\\
+\end{bmatrix}
+\]
+
+
+
+
+\begin{align*}
+	V(s) & = \mathbb{E}[G_t|s_t=s] \\
+	& = \mathbb{E}[\gamma r_{t+1} + \gamma^{2} r_{t+2} + \ldots + 		\gamma^{H-1} r_{t+H-1}|s_t=s]\\
+	& = \mathbb{E}[r_{t+1}|s_t = s] + \gamma\mathbb{E}[r_{t+2}+\gamma r_{t+3}+\gamma^2 r_{t+4}+ \ldots | s_t = s]\\
+	& = R(s) + \gamma\mathbb{E}[G_{t+1}|s_t = s] ~~~ &*\\
+	& = R(s) + \gamma\mathbb{E}[V(s_{t+1})|s_t = s]  ~~~ &*\\
+	& = \underbrace{R(s)}_\text{Immediate reward} + \underbrace{ \gamma\sum_{s' \in S}p(s' | s)V(s')}_\text{Discounted sum of future rewards}
+\end{align*}
+
+\newpage
 \subsubsection{图片}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/LLVM.png}
+	\caption{LLVM ~ LOGO}
+	\label{fig:logo}
+\end{figure}
 
 
  
  \subsubsection{表格}
  
- \begin{table}[ht]
+ \begin{table}[h]
  	\centering
  	\caption{Expected \texttt{FunctionInfo} Output for \texttt{Loop.c}}
  	\begin{tabular}{*{5}{c}}
@@ -203,10 +282,29 @@ ubuntu下安装texstudio
    	\label{fig:setfont}
    \end{figure}
  \subsubsection{页面设置}
+ \begin{lstlisting}
+ 	% 页面设置
+ 	\usepackage{geometry}
+ 	\geometry{left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm}
+ \end{lstlisting}
  
  \subsubsection{目录}
  
+ \begin{lstlisting}
+ 	\tableofcontents
+ \end{lstlisting}
+ 
  \subsubsection{文件结构}
+ 
+ \begin{itemize}
+ 	\item .sty 宏包文件。宏包的名称与文件名一致。
+ 	\item .cls 文档类文件。文档类名称与文件名一致。
+ 	\item .bib B IB TEX 参考文献数据库文件。
+ 	\item .log 排版引擎生成的日志文件，供排查错误使用。
+ 	\item .aux L A TEX 生成的主辅助文件，记录交叉引用、目录、参考文献的引用等。
+ \end{itemize}
+ 
+
  
  \subsubsection{插入链接}
  
@@ -228,6 +326,28 @@ ubuntu下安装texstudio
  
  \subsubsection{引用文献}
  
+ \href{https://www.jabref.org/}{下载jabref}
+ 
+ \begin{figure}[h]
+ 	\centering
+ 	\includegraphics[width=0.5\textwidth]{images/jabref_set.png}
+ 	\caption{jabref设置}
+ 	
+ \end{figure}
+ 
+ \begin{lstlisting}
+ 	% ref
+ 	\usepackage{gbt7714}
+ 	\bibliographystyle{gbt7714-numerical}
+ \end{lstlisting}
+ 
+ Deep learning\cite{lecun2015deep}
+ 
+ Causal confusion in imitation learning\cite{de2019causal}
+ 
+ behavioral cloning\cite{wen2020fighting}
+ 
+ 
  \subsection{online}
  
  在线的编辑器 \href{www.overleaf.com}{国际overleaf}
@@ -243,26 +363,18 @@ ubuntu下安装texstudio
  
  \section{template}
 
-使用模板， 以nips imcl为例\cite{kaelbling1996reinforcement}
+使用模板， 以 imcl为例
 
-
+\href{https://arxiv.org/}{arxiv}上下载latex版本文章
 \section{solve problem}
 
- chatgpt，查阅文档  texdoc name\cite{lecun2015deep}
-
-参考的文档，一份简单的介绍\cite{de2019causal}
-
-arxiv上下载latex版本文章\cite{wen2020fighting}
-
-install
+ chatgpt，查阅文档  texdoc name
 
 
 
 
 
-
-
-ishort-zh-cn
+\section{reference}
 
 https://github.com/CTeX-org/lshort-zh-cn/releases
 
